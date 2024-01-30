@@ -7,58 +7,48 @@ const Pricing = () => {
     {
       pageView: "10K",
       monthlyPrice: 8,
+      yearlyPrice: 72.0,
     },
     {
       pageView: "50K",
       monthlyPrice: 12,
+      yearlyPrice: 108,
     },
     {
       pageView: "100K",
       monthlyPrice: 16,
+      yearlyPrice: 144,
     },
     {
       pageView: "500K",
       monthlyPrice: 24,
+      yearlyPrice: 216,
     },
     {
       pageView: "1M",
       monthlyPrice: 36,
+      yearlyPrice: 320,
     },
   ];
 
-  const [priceValue, setPriceValue] = useState(8);
-  const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [priceValue, setPriceValue] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
-  const selectedData = DATA.find((data) => data.monthlyPrice === priceValue);
 
-  const handleMouseMove = () => {
-    const gradientStop = ((priceValue - 8) / (36 - 8)) * 100;
-    const background = `linear-gradient(90deg, #a5f3eb ${gradientStop}%, #eaeefb ${gradientStop}%)`;
-    document.getElementById("mySlider")!.style.background = background;
+  const getBackgroundSize = () => {
+    return {
+      backgroundSize: `${
+        (priceValue * 100) / (DATA.length - 1) - priceValue
+      }% 100%`,
+    };
   };
-
   const handleInputChange = (e: any) => {
     setPriceValue(e.target.valueAsNumber);
   };
 
-  const handleDiscount = () => {
-    if (selectedData) {
-      const yearlyPrice = selectedData.monthlyPrice * 12;
-      const yearlydiscount = selectedData.monthlyPrice * 12 * 0.25;
-      const discountCalcultion = yearlyPrice - yearlydiscount;
-      setCalculatedPrice(discountCalcultion);
-    }
-  };
-
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
-    handleDiscount();
   };
 
-  useEffect(() => {
-    handleMouseMove();
-    handleDiscount();
-  });
   return (
     <div className="flex flex-col items-center gap-y-32">
       {/* Header */}
@@ -75,14 +65,14 @@ const Pricing = () => {
         {/* Price Value */}
         <div className="flex justify-between items-center">
           <div className="text-lg font-bold  text-[#858fad] tracking-widest">
-            {selectedData?.pageView} PAGEVIEWS
+            {DATA[priceValue].pageView} PAGEVIEWS
           </div>
           <div className="flex items-center gap-x-2">
             <span className="text-5xl font-bold text-[#293356]">
               $
               {!isChecked
-                ? selectedData?.monthlyPrice.toFixed(2)
-                : calculatedPrice.toFixed(2)}
+                ? DATA[priceValue].monthlyPrice
+                : DATA[priceValue].yearlyPrice}
             </span>
             <span className="text-lg text-[#858fad] font-bold">
               {!isChecked ? "/ month" : "/ year"}
@@ -91,13 +81,13 @@ const Pricing = () => {
         </div>
         <div className="slider-container">
           <input
-            min={8}
-            max={36}
-            step={4}
+            min={0}
+            max={DATA.length - 1}
+            step={1}
             value={priceValue}
             type="range"
             onChange={handleInputChange}
-            onMouseMove={handleMouseMove}
+            style={getBackgroundSize()}
             id="mySlider"
           />
         </div>
