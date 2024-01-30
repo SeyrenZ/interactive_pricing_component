@@ -15,7 +15,7 @@ const config: Config = {
         // => @media (max-width: 1279px) { ... }
         lg: "1023px",
         // => @media (max-width: 1023px) { ... }
-        sm: { max: "390px" },
+        sm: { max: "500px" },
         // => @media (max-width: 639px) { ... }
         md: { min: "639px", max: "1000px" },
       },
