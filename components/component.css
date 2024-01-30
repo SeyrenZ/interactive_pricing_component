@@ -95,9 +95,9 @@ input[type=range]::-webkit-slider-thumb {
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(25px);
-    -ms-transform: translateX(25px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(28px);
+    -ms-transform: translateX(28px);
+    transform: translateX(28px);
   }
   
   /* Rounded sliders */
@@ -107,4 +107,26 @@ input[type=range]::-webkit-slider-thumb {
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  @media only screen and (max-width: 390px) {
+    input[type=range]::-webkit-slider-thumb {
+      width: 40px;
+      height: 40px;
+    }
+    .switch {  
+      width: 50px;
+      height: 22px;
+    }
+  
+    .slider:before {
+      height: 15px;
+      width: 15px;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(28px);
+      -ms-transform: translateX(28px);
+      transform: translateX(28px);
+    }
   }
