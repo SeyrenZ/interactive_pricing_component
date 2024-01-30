@@ -74,6 +74,7 @@ const Pricing = () => {
               {!isChecked
                 ? DATA[priceValue].monthlyPrice
                 : DATA[priceValue].yearlyPrice}
+              .00
             </span>
             <span className="text-lg text-[#858fad] font-bold">
               {!isChecked ? "/ month" : "/ year"}
