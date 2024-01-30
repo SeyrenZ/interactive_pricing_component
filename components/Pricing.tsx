@@ -36,7 +36,6 @@ const Pricing = () => {
 
   const getBackgroundSize = () => {
     return {
-      // idk how this work lmao i just type randomly
       backgroundSize: `${
         (priceValue * 100) / (DATA.length - 1) - priceValue
       }% 100%`,
